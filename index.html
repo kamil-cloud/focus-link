@@ -23,7 +23,7 @@
   <main>
     <div class="brand"><span class="mark" aria-hidden="true"></span>Focus</div>
     <h1 id="title">Opening Focus…</h1>
-    <p id="text" role="status">Finding your teacher's Focus server.</p>
+    <p id="text" role="status">Finding the Focus server.</p>
     <button id="retry" type="button" hidden>Try again</button>
   </main>
   <script>
@@ -32,6 +32,7 @@
     (() => {
       const params = new URLSearchParams(location.search);
       const code = params.get('join');
+      const teach = params.has('teach');
       const $ = (id) => document.getElementById(id);
 
       async function getJson(url, headers = {}) {
@@ -59,7 +60,7 @@
       async function go() {
         $('retry').hidden = true;
         $('title').textContent = 'Opening Focus…';
-        $('text').textContent = "Finding your teacher's Focus server.";
+        $('text').textContent = "Finding the Focus server.";
         let url = null;
         try {
           url = await findServer();
@@ -73,7 +74,8 @@
           $('retry').focus();
           return;
         }
-        location.replace(code ? `${url}/j/${encodeURIComponent(code)}` : `${url}/login`);
+        // Code d'invitation → page de la classe ; ?teach=1 → connexion prof ; sinon → page d'accueil.
+        location.replace(code ? `${url}/j/${encodeURIComponent(code)}` : teach ? `${url}/login` : `${url}/`);
       }
 
       $('retry').addEventListener('click', go);

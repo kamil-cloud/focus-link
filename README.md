@@ -1,7 +1,9 @@
 # Focus — permanent link
 
-This tiny site gives Focus a link that never changes: https://kamil-cloud.github.io/focus-link/
+This tiny site gives Focus a link that never changes: https://focus-class.com/
+(the old https://kamil-cloud.github.io/focus-link/ redirects there).
 
+- With nothing after it, it opens the Focus homepage (for teachers and students).
 - `?join=CODE` sends a student to the invite page of class `CODE`.
 - `?teach=1` sends a teacher to the sign-in page.
 - `server.json` holds the current address of the Focus server. The Focus launcher
